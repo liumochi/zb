@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //定义一个节点类
+        var Node = function(v) {
+            this.value = v;
+            this.next = null;
+        };
+        var List = function() {
+            //定义头节点
+            this.head = new Node(null);
+            //在最后插入节点
+            this.insert = function(v) {
+                var p = this.head;
+                //循环找到最后的节点
+                while (p.next != null) {
+                    p = p.next;
+                }
+                p.next = new Node(v);
+            };
+            //在任意位置插入节点
+            this.insertAny = function(pos, val) {
+                if (pos < 0 || pos > this.getLength()) {
+                    return false;
+                } else {
+                    var i = 0;
+                    var p = this.head;
+                    while (i < pos) {
+                        i++;
+                        p = p.next;
+                    }
+                    var node = new Node(val);
+                    node.next = p.next;
+                    p.next = node;
+                }
+            };
+            //删除任意节点
+            this.delete = function(pos) {
+                if (pos < 0 || pos >= this.getLength()) {
+                    return false;
+                } else {
+                    var i = 0;
+                    var p = this.head;
+                    while (i < pos) {
+                        i++;
+                        p = p.next;
+                    }
+                    p.next = p.next.next;
+                }
+            };
+            //查找指定节点
+            this.search = function(val) {
+                var p = this.head;
+                while (p.next != null) {
+                    p = p.next;
+                    if (p.value == val) {
+                        return p;
+                    }
+                }
+                return null;
+            };
+            //判断是否为空
+            this.isNull = function() {
+                var p = this.head;
+                if (p.next == null) {
+                    return true;
+                }
+                return false;
+            };
+            //输出所有节点
+            this.print = function() {
+                var p = this.head;
+                var str = [];
+                while (p.next != null) {
+                    p = p.next;
+                    str.push(p.value);
+                }
+                return str;
+            };
+            //获得链表的长度
+            this.getLength = function() {
+                var p = this.head;
+                var i = 0;
+                while (p.next != null) {
+                    i++;
+                    p = p.next;
+                }
+                return i;
+            }
+        };
+        var test = new List();
+        test.insert(1);
+        test.insert(2);
+        test.insertAny(2, 3);
+        test.delete(2);
+        console.log(test.getLength());
+        console.log(test.print());
+        console.log(test.search(3));
+    </script>
+</body>
+
+</html>

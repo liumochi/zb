@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var object = {
+            b: {
+                c: 4
+            },
+            d: [{
+                e: 5
+            }, {
+                e: 6
+            }]
+        };
+
+        function parse(obj, str) {
+            var reg = /(\[)\d+(\])/g;
+
+            return reg.exec(str);
+        }
+        console.log(parse(null, 'd.e[0]'));
+        // console.log(parse(object, 'b.c') == 4) //true
+        // console.log(parse(object, 'd[0].e') == 5) //true
+        // console.log(parse(object, 'd.0.e') == 5) //true
+        // console.log(parse(object, 'd[1].e') == 6) //true
+        // console.log(parse(object, 'd.1.e') == 6) //true
+        // console.log(parse(object, 'f') == 'undefined') //true
+    </script>
+</body>
+
+</html>

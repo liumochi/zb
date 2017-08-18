@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var testArr = [35,22,1,56,88,25];
+        function insertSort(arr){
+            var temp;
+            for(var i=0;i<arr.length;i++){
+                temp = arr[i];
+                for(var j=i;j>0 && arr[j-1]>temp;j--){
+                    arr[j] = arr[j-1];
+                }
+                arr[j] = temp;
+            }
+        }
+      insertSort(testArr);
+       console.log(testArr);
+    </script>
+</body>
+</html>

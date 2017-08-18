@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //给定两个串a，b，问b是否是a的子串变位词。
+        //举例：a=hello b=lel ,lle ,lle =>true
+        //              b=elo    =>false
+        var str1 = 'hello',
+            str2 = 'elo';
+        //思路：滑动窗口,每一个滑动str2的长度，进行比较，比较完之后，把滑动窗口的字符串删除。  
+        function isChange(str1, str2) {
+            var str2Len = str2.length;
+            var str1Len = str1.length;
+            for (var i = 0; i < str1Len - str2Len + 1; i++) {
+                var newStr = str1.substr(i, str2Len);
+                for (var j = 0; j < str2Len; j++) {
+                    for (var k = 0; k < newStr.length; k++) {
+                        if (str2.substr(j, 1) == newStr.substr(k, 1)) {
+                            var reg = new RegExp('' + newStr.substr(k, 1) + '');
+                            newStr = newStr.replace(reg, "");
+                        }
+                    }
+                    if (newStr.length == 0) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
+        //利用hash,将字符串中的字母(假设只有小写字母)转化成0-25的数字
+        //另外开辟一个数组,用来表示每个字母出现的次数。
+        //依然根据滑块的思想，每次滑动str2的长度
+        function isChange2(str1, str2) {
+            var str1Len = str1.length,
+                str2Len = str2.length,
+                arr = [];
+            for (var i = 0; i < 26; i++) {
+                arr[i] = 0;
+            };
+            for (var i = 0; i < str1Len; i++) {
+                arr[parseInt(str1.substr(i, 1).charCodeAt() - 'a'.charCodeAt())] = 1;
+            };
+            return arr;
+        }
+        console.log(isChange2(str1, str2));
+        console.log();
+    </script>
+</body>
+
+</html>

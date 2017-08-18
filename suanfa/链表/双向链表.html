@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var Node = function(val) {
+            this.pre = null;
+            this.next = null;
+            this.value = val;
+        };
+
+        var List = function() {
+            this.head = new Node(null);
+            //在除了尾部的任意位置插入一个节点
+            this.insertAny = function(pos, val) {
+                if (pos < 0 || pos > this.getLength()) {
+                    return null;
+                } else {
+                    var p = this.head;
+                    var i = 0;
+                    while (pos > i) {
+                        i++;
+                        p = p.next;
+                    }
+                    var node = new Node(val);
+                    node.next = p.next;
+                    node.pre = p;
+                    p.next.pre = node;
+                    p.next = node;
+                }
+            };
+            //尾插
+            this.add = function(val) {
+                var p = this.head;
+                while (p.next != null) {
+                    p = p.next;
+                }
+                var node = new Node(val);
+                p.next = node;
+                node.pre = p;
+            };
+            //删除任意位置节点
+            this.remove = function(idx) {
+                if (idx < 0 || idx > this.getLength()) {
+                    return false;
+                } else {
+                    var i = 0;
+                    var p = this.head;
+                    while (i <= idx) {
+                        i++;
+                        p = p.next;
+                    }
+                    p.pre.next = p.next;
+                    p.next.pre = p.pre;
+                    p.pre = null;
+                    p.next = null;
+                }
+            };
+            //得到总长度
+            this.getLength = function() {
+                var p = this.head;
+                var i = 0;
+                while (p.next != null) {
+                    i++;
+                    p = p.next;
+                }
+                return i;
+            };
+            this.print = function() {
+                var p = this.head;
+                var arr = [];
+                while (p.next != null) {
+                    p = p.next;
+                    arr.push(p.value);
+                }
+                return arr;
+            };
+        };
+
+        var test = new List();
+        test.add(1);
+        test.add(3);
+        test.add(2);
+        test.insertAny(0, 4);
+        test.remove(0);
+        console.log(test.print());
+    </script>
+</body>
+
+</html>
