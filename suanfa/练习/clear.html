@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container{
+            background: red;
+            border: 1px solid #ccc;
+            margin:50px auto;
+            padding:50px;
+
+        }
+        #container:after{
+            content: "";
+            display:block;
+            clear:both;
+            visibility:hidden;
+            zoom: 1;
+        }
+        #container div{
+            width: 200px;
+            height:200px;
+            
+        }
+        .div1{
+            background: blue;
+            float:left;
+            
+        }
+        .div2{
+            background: green;
+            float:left;
+
+        }
+        .div3{
+            background: #000000;
+            float:left;
+            
+        }
+      
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+    </div>
+</body>
+</html>
